@@ -49,7 +49,7 @@ async def lifespan(app: FastAPI):
 async def cleanup_periodic():
     """Periodic cleanup task for expired jobs"""
     while True:
-        await asyncio.sleep(300)  # Every 5 minutes
+        await asyncio.sleep(settings.cleanup_interval_seconds)
         if state_manager:
             await state_manager.cleanup_expired_jobs()
 

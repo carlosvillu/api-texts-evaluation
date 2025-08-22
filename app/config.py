@@ -23,6 +23,11 @@ class Settings(BaseSettings):
     max_num_seqs: int = 128
     compilation_level: int = 2
 
+    # Service Configuration
+    cleanup_interval_seconds: int = 300
+    time_estimation_per_item: int = 2
+    sse_polling_interval: int = 1
+
     class Config:
         env_file = ".env"
 

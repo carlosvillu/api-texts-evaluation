@@ -5,6 +5,7 @@ import json
 
 from ..models import EvaluationRequest, JobResponse
 from ..utils.timing import ProgressCalculator
+from ..config import settings
 
 router = APIRouter()
 
@@ -24,8 +25,8 @@ async def evaluate_texts(
     job_data = {"items": [item.dict() for item in request.items]}
     job_id = await state_manager.create_job(job_data)
 
-    # Estimate time (approximation: 2 seconds per item)
-    estimated_time = len(request.items) * 2
+    # Estimate time using configurable estimation per item
+    estimated_time = len(request.items) * settings.time_estimation_per_item
 
     # Start background processing
     background_tasks.add_task(process_evaluation_job, job_id)
@@ -53,7 +54,7 @@ async def process_evaluation_job(job_id: str):
         items = job["data"]["items"]
         async for batch_result in inference_engine.process_batch(
             items,
-            batch_size=10
+            batch_size=settings.batch_size
         ):
             # Add batch results to job
             await state_manager.add_batch_results(
@@ -99,7 +100,7 @@ async def stream_results(job_id: str):
                 event_data = {
                     "event": "batch_complete",
                     "data": {
-                        "batch_number": (current_processed // 10) + 1,
+                        "batch_number": (current_processed // settings.batch_size) + 1,
                         "results": new_results,
                         "progress": progress_info
                     }
@@ -127,7 +128,7 @@ async def stream_results(job_id: str):
                 break
 
             # Wait before next check
-            await asyncio.sleep(1)
+            await asyncio.sleep(settings.sse_polling_interval)
 
     return StreamingResponse(
         generate(),
