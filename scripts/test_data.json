@@ -1,0 +1,34 @@
+{
+  "items": [
+    {
+      "id_alumno": "DEMO_001",
+      "curso": "3r ESO",
+      "consigna": "Explica què és la fotosíntesi i per què és important per a la vida.",
+      "respuesta": "La fotosíntesi és el procés pel qual les plantes verdes fabriquen el seu propi aliment utilitzant la llum solar, l'aigua i el diòxid de carboni de l'aire. Aquest procés és molt important perquè produeix oxigen que necessitem per respirar i també serveix com a base de la cadena alimentària."
+    },
+    {
+      "id_alumno": "DEMO_002", 
+      "curso": "3r ESO",
+      "consigna": "Descriu el cicle de l'aigua i els seus principals components.",
+      "respuesta": "L'aigua s'evapora dels oceans i rius per la calor del sol, després forma núvols al cel i quan plou torna a la terra."
+    },
+    {
+      "id_alumno": "DEMO_003",
+      "curso": "4t ESO", 
+      "consigna": "Explica les causes i conseqüències del canvi climàtic.",
+      "respuesta": "El canvi climàtic passa perquè hi ha massa CO2 a l'atmosfera per culpa de les fàbriques i els cotxes. Això fa que faci més calor i que el gel dels pols es fongui, augmentant el nivell del mar. També hi ha més sequeres i inundacions."
+    },
+    {
+      "id_alumno": "DEMO_004",
+      "curso": "2n ESO",
+      "consigna": "Què són els animals vertebrats? Dona exemples.",
+      "respuesta": "Els animals vertebrats són els que tenen esquelet intern amb columna vertebral. Per exemple els peixos, les aus, els mamífers com els gossos i gats, els rèptils com les serps i els amfibis com les granotes."
+    },
+    {
+      "id_alumno": "DEMO_005",
+      "curso": "1r ESO", 
+      "consigna": "Explica què són les cèl·lules.",
+      "respuesta": "Les cèl·lules són molt petites i no es veuen. Tots els éssers vius en tenen."
+    }
+  ]
+}
