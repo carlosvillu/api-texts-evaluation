@@ -72,6 +72,11 @@
   BLOCK_SIZE=16
   MAX_NUM_SEQS=128
   COMPILATION_LEVEL=2
+
+  # Service Configuration
+  CLEANUP_INTERVAL_SECONDS=300
+  TIME_ESTIMATION_PER_ITEM=2
+  SSE_POLLING_INTERVAL=1
   ```
 
 - [x] **1.2.3** Crear `Dockerfile` optimizado para GPU L40:
@@ -537,7 +542,7 @@
 
 **Tarea**: Crear `app/main.py` con FastAPI
 
-- [ ] **3.1.1** Configurar aplicación base:
+- [x] **3.1.1** Configurar aplicación base:
 
   ```python
   from fastapi import FastAPI, BackgroundTasks
@@ -592,7 +597,7 @@
   )
   ```
 
-- [ ] **3.1.2** Incluir rutas:
+- [x] **3.1.2** Incluir rutas:
 
   ```python
   from .routes import evaluation, health
@@ -610,15 +615,15 @@
 
 **Criterios de aceptación**:
 
-- FastAPI configurada y funcional
-- Inicialización de componentes exitosa
-- Limpieza automática implementada
+- ✅ FastAPI configurada y funcional
+- ✅ Inicialización de componentes exitosa
+- ✅ Limpieza automática implementada
 
 ### 3.2 Endpoints de Evaluación
 
 **Tarea**: Implementar `app/routes/evaluation.py`
 
-- [ ] **3.2.1** Endpoint POST /evaluate:
+- [x] **3.2.1** Endpoint POST /evaluate:
 
   ```python
   from fastapi import APIRouter, HTTPException, BackgroundTasks
@@ -661,7 +666,7 @@
       )
   ```
 
-- [ ] **3.2.2** Función de procesamiento en background:
+- [x] **3.2.2** Función de procesamiento en background:
 
   ```python
   async def process_evaluation_job(job_id: str):
@@ -693,7 +698,7 @@
           print(f"Error processing job {job_id}: {e}")
   ```
 
-- [ ] **3.2.3** Endpoint GET /stream/{job_id} con SSE:
+- [x] **3.2.3** Endpoint GET /stream/{job_id} con SSE:
 
   ```python
   @router.get("/stream/{job_id}")
@@ -768,15 +773,15 @@
 
 **Criterios de aceptación**:
 
-- Endpoint /evaluate funcional
-- Procesamiento en background operativo
-- SSE streaming implementado correctamente
+- ✅ Endpoint /evaluate funcional
+- ✅ Procesamiento en background operativo
+- ✅ SSE streaming implementado correctamente
 
 ### 3.3 Endpoints de Salud
 
 **Tarea**: Implementar `app/routes/health.py`
 
-- [ ] **3.3.1** Health check básico:
+- [x] **3.3.1** Health check básico:
 
   ```python
   from fastapi import APIRouter
@@ -806,9 +811,21 @@
 
 **Criterios de aceptación**:
 
-- Health check operativo
-- Información del sistema disponible
-- Estado del modelo reportado correctamente
+- ✅ Health check operativo
+- ✅ Información del sistema disponible
+- ✅ Estado del modelo reportado correctamente
+
+**Estado**: ✅ **COMPLETADA** - Fase 3 implementada exitosamente
+- Rama `feature/phase-3-fastapi-web-layer` creada
+- PR #4: https://github.com/carlosvillu/api-texts-evaluation/pull/4
+- Commits: 
+  - 892aa23 - feat: implement Phase 3 - FastAPI Web Layer
+  - b278fc9 - fix: replace hardcoded values with configurable environment variables
+- **Mejoras adicionales implementadas**:
+  - Variables de entorno configurables para todos los parámetros
+  - Eliminación de valores hardcodeados (magic numbers)
+  - Configuración centralizada en `app/config.py`
+  - Nuevas variables: `CLEANUP_INTERVAL_SECONDS`, `TIME_ESTIMATION_PER_ITEM`, `SSE_POLLING_INTERVAL`
 
 ---
 
