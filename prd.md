@@ -156,7 +156,7 @@
 
 **Tarea**: Definir esquemas de datos en `app/models.py`
 
-- [ ] **2.1.1** Crear modelos de entrada:
+- [x] **2.1.1** Crear modelos de entrada:
 
   ```python
   from pydantic import BaseModel
@@ -173,7 +173,7 @@
       items: List[EvaluationItem]
   ```
 
-- [ ] **2.1.2** Crear modelos de respuesta:
+- [x] **2.1.2** Crear modelos de respuesta:
 
   ```python
   class EvaluationResult(BaseModel):
@@ -197,7 +197,7 @@
       avg_time_per_item: float
   ```
 
-- [ ] **2.1.3** Crear modelos para eventos SSE:
+- [x] **2.1.3** Crear modelos para eventos SSE:
 
   ```python
   class BatchCompleteEvent(BaseModel):
@@ -211,15 +211,15 @@
 
 **Criterios de aceptación**:
 
-- Modelos Pydantic definidos y funcionales
-- Validación de datos implementada
-- Esquemas listos para API
+- ✅ Modelos Pydantic definidos y funcionales
+- ✅ Validación de datos implementada
+- ✅ Esquemas listos para API
 
 ### 2.2 Motor de Inferencia
 
 **Tarea**: Migrar código del notebook a `app/services/inference.py`
 
-- [ ] **2.2.1** Implementar clase `InferenceEngine`:
+- [x] **2.2.1** Implementar clase `InferenceEngine`:
 
   ```python
   import os
@@ -268,7 +268,7 @@
           )
   ```
 
-- [ ] **2.2.2** Migrar función de formateo de prompts:
+- [x] **2.2.2** Migrar función de formateo de prompts:
 
   ```python
   def _format_prompt(self, item: dict) -> str:
@@ -296,7 +296,7 @@
   <start_of_turn>model"""
   ```
 
-- [ ] **2.2.3** Implementar procesamiento por batches:
+- [x] **2.2.3** Implementar procesamiento por batches:
 
   ```python
   async def process_batch(self, items: List[dict], batch_size: int = 10) -> AsyncIterator[Dict[str, Any]]:
@@ -322,7 +322,7 @@
           }
   ```
 
-- [ ] **2.2.4** Implementar parser de salidas:
+- [x] **2.2.4** Implementar parser de salidas:
   ```python
   def _parse_outputs(self, outputs, items: List[dict]) -> List[dict]:
       """Parsear salidas del modelo a formato estructurado"""
@@ -350,15 +350,15 @@
 
 **Criterios de aceptación**:
 
-- Código del notebook migrado exitosamente
-- Funcionalidad de inferencia operativa
-- Manejo de errores implementado
+- ✅ Código del notebook migrado exitosamente
+- ✅ Funcionalidad de inferencia operativa
+- ✅ Manejo de errores implementado
 
 ### 2.3 Gestor de Estado
 
 **Tarea**: Implementar `StateManager` en `app/services/state.py`
 
-- [ ] **2.3.1** Implementar clase base:
+- [x] **2.3.1** Implementar clase base:
 
   ```python
   import asyncio
@@ -389,7 +389,7 @@
           return job_id
   ```
 
-- [ ] **2.3.2** Métodos de gestión de trabajos:
+- [x] **2.3.2** Métodos de gestión de trabajos:
 
   ```python
   async def get_job(self, job_id: str) -> Optional[Dict[str, Any]]:
@@ -411,7 +411,7 @@
               self.jobs[job_id]["processed"] = len(self.jobs[job_id]["results"])
   ```
 
-- [ ] **2.3.3** Limpieza automática con TTL:
+- [x] **2.3.3** Limpieza automática con TTL:
 
   ```python
   async def cleanup_expired_jobs(self):
@@ -430,15 +430,15 @@
 
 **Criterios de aceptación**:
 
-- StateManager funcional y thread-safe
-- Gestión de trabajos implementada
-- Limpieza automática operativa
+- ✅ StateManager funcional y thread-safe
+- ✅ Gestión de trabajos implementada
+- ✅ Limpieza automática operativa
 
 ### 2.4 Configuración
 
 **Tarea**: Crear `app/config.py` para centralizar configuración
 
-- [ ] **2.4.1** Implementar clase de configuración:
+- [x] **2.4.1** Implementar clase de configuración:
 
   ```python
   import os
@@ -473,15 +473,15 @@
 
 **Criterios de aceptación**:
 
-- Configuración centralizada y tipada
-- Variables de entorno integradas
-- Settings accesibles globalmente
+- ✅ Configuración centralizada y tipada
+- ✅ Variables de entorno integradas
+- ✅ Settings accesibles globalmente
 
 ### 2.5 Utilidades
 
 **Tarea**: Crear utilidades en `app/utils/timing.py`
 
-- [ ] **2.5.1** Implementar calculadora de progreso:
+- [x] **2.5.1** Implementar calculadora de progreso:
 
   ```python
   import time
@@ -517,9 +517,14 @@
 
 **Criterios de aceptación**:
 
-- Cálculo de progreso preciso
-- Estimaciones de tiempo implementadas
-- Métricas de rendimiento disponibles
+- ✅ Cálculo de progreso preciso
+- ✅ Estimaciones de tiempo implementadas
+- ✅ Métricas de rendimiento disponibles
+
+**Estado**: ✅ **COMPLETADA** - Fase 2 implementada exitosamente
+- Rama `feature/phase-2-core-components` creada
+- PR #3: https://github.com/carlosvillu/api-texts-evaluation/pull/3
+- Commit: 81cf8c0 - feat: implement Phase 2 - Core Components
 
 ---
 
