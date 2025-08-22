@@ -15,6 +15,11 @@ COPY scripts/ ./scripts/
 
 RUN mkdir -p /tmp/vllm_cache /workspace/transformers /workspace/hub
 
+# Add non-root user for better security
+RUN groupadd -r appuser && useradd -r -g appuser appuser
+RUN chown -R appuser:appuser /app /tmp/vllm_cache /workspace
+USER appuser
+
 ENV HF_HOME=/workspace
 ENV TRANSFORMERS_CACHE=/workspace/transformers
 ENV HF_HUB_CACHE=/workspace/hub
