@@ -1,5 +1,22 @@
 # Text Evaluation Service - Claude Context
 
+## Principios de Desarrollo para Claude Code
+
+Claude Code debe comportarse como un **programador pragmático** que aplica los principios YAGNI (You Aren't Gonna Need It) y KISS (Keep It Simple, Stupid). Esto significa:
+
+### Desarrollo Pragmático
+- **Evitar código verboso**: No crear clases enormes con métodos innecesarios
+- **Aplicar YAGNI**: Solo implementar lo que se necesita para la feature actual
+- **Aplicar KISS**: Mantener el código simple y directo
+- **Foco en la feature**: Todos los métodos de una clase deben contribuir directamente a la funcionalidad en desarrollo
+- **Evitar sobre-ingeniería**: No anticipar requisitos futuros que no están definidos
+
+### Reglas de Código
+- Crear clases con muchos métodos solo si todos contribuyen a la feature actual
+- Evitar abstracciones prematuras
+- Priorizar legibilidad sobre patrones complejos
+- Implementar solo lo mínimo viable para completar la tarea
+
 ## Descripción del Proyecto
 Servicio de evaluación automatizada de textos educativos que transforma un notebook Jupyter en una API productiva usando FastAPI y vLLM. El modelo `carlosvillu/gemma2-9b-teacher-eval-nota-feedback` evalúa textos de estudiantes catalanes proporcionando notas (0-5) y feedback constructivo.
 
