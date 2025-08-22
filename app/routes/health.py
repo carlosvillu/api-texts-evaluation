@@ -28,8 +28,9 @@ async def health_check():
             gpu_props = torch.cuda.get_device_properties(0)
             health_data["gpu_memory_total"] = gpu_props.total_memory
             health_data["gpu_name"] = gpu_props.name
-        except:
+        except Exception as e:
             health_data["gpu_memory_total"] = None
             health_data["gpu_name"] = None
+            health_data["gpu_error"] = str(e)
 
     return health_data
