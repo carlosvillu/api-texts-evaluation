@@ -110,10 +110,10 @@ log_info "Servicio estará disponible en: http://0.0.0.0:${PORT:-8000}"
 log_info "Health check: http://0.0.0.0:${PORT:-8000}/health"
 
 # Usar exec para que el proceso de Python sea PID 1 (importante para Docker)
+# Note: Removed --workers parameter to avoid conflicts with lifespan events
 exec python3 -m uvicorn app.main:app \
     --host 0.0.0.0 \
     --port ${PORT:-8000} \
-    --workers 1 \
     --log-level info \
     --access-log \
     --no-server-header

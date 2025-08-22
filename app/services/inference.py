@@ -2,6 +2,7 @@ import os
 import torch
 import time
 import json
+import asyncio
 from vllm import LLM, SamplingParams
 from typing import List, AsyncIterator, Dict, Any
 
@@ -78,7 +79,12 @@ Alumne de {item['curso']} respon a "{item['consigna']}":
             batch_items = items[i:i+batch_size]
             start_time = time.time()
 
-            outputs = self.llm.generate(batch_prompts, self.sampling_params)
+            # Run vLLM generation in thread to avoid blocking async event loop
+            outputs = await asyncio.to_thread(
+                self.llm.generate, 
+                batch_prompts, 
+                self.sampling_params
+            )
 
             results = self._parse_outputs(outputs, batch_items)
             elapsed = time.time() - start_time

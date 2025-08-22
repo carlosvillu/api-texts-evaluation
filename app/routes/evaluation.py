@@ -111,7 +111,9 @@ async def stream_results(job_id: str):
 
             # Check if completed
             if job["status"] == "completed":
-                total_time = (job.get("end_time", 0) - job.get("start_time", 0)) if job.get("start_time") else 0
+                start_time = job.get("start_time")
+                end_time = job.get("end_time")
+                total_time = (end_time - start_time) if (start_time and end_time) else 0
                 final_event = {
                     "event": "complete",
                     "data": {
