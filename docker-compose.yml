@@ -1,0 +1,22 @@
+version: "3.8"
+services:
+  text-eval-api:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - MODEL_NAME=${MODEL_NAME}
+      - GPU_MEMORY_UTILIZATION=${GPU_MEMORY_UTILIZATION}
+    volumes:
+      - ./app:/app/app
+      - huggingface_cache:/workspace
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+volumes:
+  huggingface_cache:
